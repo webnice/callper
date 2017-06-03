@@ -1,6 +1,6 @@
 # callper
 
-[![GoDoc](https://godoc.org/github.com/webnice/callper?status.svg)](https://godoc.org/github.com/webnice/callper)
+[![GoDoc](https://godoc.org/github.com/webnice/callper/counter?status.svg)](https://godoc.org/github.com/webnice/callper/counter)
 [![Build Status](https://travis-ci.org/webnice/callper.svg?branch=v1)](https://travis-ci.org/webnice/callper)
 [![Coverage Status](https://coveralls.io/repos/github/webnice/callper/badge.svg?branch=v1)](https://coveralls.io/github/webnice/callper?branch=v1)
 
