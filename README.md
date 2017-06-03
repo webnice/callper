@@ -1,6 +1,7 @@
 # callper
 
 [![GoDoc](https://godoc.org/github.com/webnice/callper?status.svg)](https://godoc.org/github.com/webnice/callper)
+[![Coverage Status](https://coveralls.io/repos/github/webnice/callper/badge.svg?branch=master)](https://coveralls.io/github/webnice/callper?branch=master)
 
 Golang library
 
@@ -23,5 +24,5 @@ var percent float64
 var c = counter.new()
 
 c.Tic()
-percent.Percent()
+percent = c.Percent()
 ```
