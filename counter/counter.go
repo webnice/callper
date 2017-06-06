@@ -64,7 +64,7 @@ func (cou *impl) Percent() (ret float64) {
 	for key = range cou.mem {
 		tm = time.Unix(0, key)
 		du = time.Since(tm)
-		if du <= 0 {
+		if du <= 0 || du < cou.averageDuration {
 			cur += cou.mem[key]
 		} else {
 			pre += cou.mem[key]

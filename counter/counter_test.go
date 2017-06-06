@@ -3,16 +3,9 @@ package counter
 //import "gopkg.in/webnice/debug.v1"
 //import "gopkg.in/webnice/log.v2"
 import (
-	"sort"
 	"testing"
 	"time"
 )
-
-type sortReverseKeys []int64
-
-func (s sortReverseKeys) Len() int           { return len(s) }
-func (s sortReverseKeys) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
-func (s sortReverseKeys) Less(i, j int) bool { return s[i] > s[j] }
 
 func TestNew(t *testing.T) {
 	cou := New().(*impl)
@@ -75,27 +68,29 @@ func TestPercent(t *testing.T) {
 		key = time.Now().Add(0 - time.Minute*time.Duration(10-i-1)*2).Truncate(gist.averageDuration / 10).UnixNano()
 		gist.mem[key] = float64(i * 2)
 	}
-	if gist.Percent() != check(gist.mem, gist.averageCount) {
+	if gist.Percent() != check(gist.mem, gist.averageDuration, gist.averageCount) {
 		t.Error("Error Percent()")
 	}
 }
 
-func check(mem map[int64]float64, n float64) (percent float64) {
+func check(mem map[int64]float64, d time.Duration, n float64) (percent float64) {
+	var tm time.Time
+	var du time.Duration
 	var key int64
-	var keys []int64
 	var sum float64
+	var cur float64
 
 	for key = range mem {
-		keys = append(keys, key)
-	}
-	sort.Sort(sortReverseKeys(keys))
-	for key = range mem {
-		if key != keys[0] {
+		tm = time.Unix(0, key)
+		du = time.Since(tm)
+		if du <= 0 || du < d {
+			cur += mem[key]
+		} else {
 			sum += mem[key]
 		}
 	}
 	percent = sum / (n - 1)
-	percent = mem[keys[0]] / percent * 100
+	percent = cur / percent * 100
 
 	return
 }
