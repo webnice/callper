@@ -16,7 +16,7 @@ func init() {
 		for {
 			<-tic.C
 			c++
-			beco.Tic()
+			beco.Hit()
 			if c > 1000000000 {
 				break
 			}
@@ -28,7 +28,7 @@ func init() {
 
 func BenchmarkTic(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		beco.Tic()
+		beco.Hit()
 	}
 }
 
@@ -42,7 +42,7 @@ func BenchmarkClean(b *testing.B) {
 func BenchmarkPercent(b *testing.B) {
 	var gist *impl
 	var key int64
-	var count float64
+	var count uint32
 
 	// Info
 	gist = beco.(*impl)
@@ -50,7 +50,6 @@ func BenchmarkPercent(b *testing.B) {
 	for key = range gist.mem {
 		count += gist.mem[key]
 	}
-	//b.Logf("Count call Tic(): %f", count)
 	gist.RUnlock()
 
 	for n := 0; n < b.N; n++ {
