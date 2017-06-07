@@ -1,8 +1,9 @@
 # callper
 
 [![GoDoc](https://godoc.org/gopkg.in/webnice/callper.v1/counter?status.svg)](https://godoc.org/gopkg.in/webnice/callper.v1/counter)
-[![Build Status](https://travis-ci.org/webnice/callper.svg?branch=v1)](https://travis-ci.org/webnice/callper)
 [![Coverage Status](https://coveralls.io/repos/github/webnice/callper/badge.svg?branch=v1)](https://coveralls.io/github/webnice/callper?branch=v1)
+[![Build Status](https://travis-ci.org/webnice/callper.svg?branch=v1)](https://travis-ci.org/webnice/callper)
+[![CircleCI](https://circleci.com/gh/webnice/callper/tree/v1.svg?style=svg)](https://circleci.com/gh/webnice/callper/tree/v1)
 
 Golang library
 
