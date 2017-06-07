@@ -9,9 +9,10 @@ test:
 	clear
 	ln -s . src; true
 	GOPATH=${GOPATH} go test -race -cover -v -coverprofile=coverage.log counter
-	go test -bench=. -v counter
-	go tool cover -html=coverage.log
+.PHONY: test
 
+cover: test
+	GOPATH=${GOPATH} go tool cover -html=coverage.log
 .PHONY: test
 
 lint:

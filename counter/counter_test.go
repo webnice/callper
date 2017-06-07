@@ -68,6 +68,6 @@ func TestPercent(t *testing.T) {
 	}
 	percent = gist.Percent()
 	if percent != 45.000000 {
-		t.Error("Error Percent(), return %f expected 45.000000")
+		t.Errorf("Error Percent(), return %f expected 45.000000", percent)
 	}
 }

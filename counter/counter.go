@@ -70,7 +70,7 @@ func (cou *impl) Percent() (ret float64) {
 	var ap float64
 
 	cou.Clean()
-	history = make([]uint32, cou.count, cou.count)
+	history = make([]uint32, cou.count)
 	cou.RLock()
 	for key, value = range cou.mem {
 		tm = time.Unix(0, key)
