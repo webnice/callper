@@ -5,4 +5,3 @@ test:
 dependencies:
   override:
     - go get -t -d -v ./...
-    - go build -v
