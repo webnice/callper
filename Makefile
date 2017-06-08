@@ -13,7 +13,12 @@ test:
 
 cover: test
 	GOPATH=${GOPATH} go tool cover -html=coverage.log
-.PHONY: test
+.PHONY: cover
+
+bench:
+	ln -s . src; true
+	GOPATH=${GOPATH} go test -race -bench=. ./...
+.PHONY: bench
 
 lint:
 	gometalinter \
