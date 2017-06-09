@@ -67,7 +67,7 @@ func TestPercent(t *testing.T) {
 		gist.mem[key] = uint32(i * 2)
 	}
 	percent = gist.Percent()
-	if percent != 45.000000 {
-		t.Errorf("Error Percent(), return %f expected 45.000000", percent)
+	if int64(percent) != 142 {
+		t.Errorf("Error Percent(), return %f expected 142.767857", percent)
 	}
 }
