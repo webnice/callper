@@ -86,7 +86,7 @@ func (cou *impl) Percent() (ret float64) {
 		if history[n] == 0 {
 			continue
 		}
-		ap = float64(history[0]) / float64(history[n])
+		ap += float64(history[0]) / float64(history[n])
 		m++
 	}
 	if m == 0 {
