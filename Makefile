@@ -7,7 +7,7 @@ default: lint test
 
 test:
 	clear
-	ln -s . src; true
+	ln -s . src 2>/dev/null; true
 	GOPATH=${GOPATH} go test -race -cover -v -coverprofile=coverage.log counter
 .PHONY: test
 
@@ -16,7 +16,7 @@ cover: test
 .PHONY: cover
 
 bench:
-	ln -s . src; true
+	ln -s . src 2>/dev/null; true
 	GOPATH=${GOPATH} go test -race -bench=. ./...
 .PHONY: bench
 

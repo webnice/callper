@@ -56,3 +56,9 @@ func BenchmarkPercent(b *testing.B) {
 		beco.Percent()
 	}
 }
+
+func BenchmarkIsFirst(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		_ = beco.IsFirst()
+	}
+}

@@ -71,3 +71,15 @@ func TestPercent(t *testing.T) {
 		t.Errorf("Error Percent(), return %f expected 142.767857", percent)
 	}
 }
+
+func TestIsFirst(t *testing.T) {
+	var cou = New()
+
+	if cou.IsFirst() != true {
+		t.Errorf("Error IsFirst(), return %t expected true", cou.IsFirst())
+	}
+	cou.Hit()
+	if cou.IsFirst() != false {
+		t.Errorf("Error IsFirst(), return %t expected false", cou.IsFirst())
+	}
+}

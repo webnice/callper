@@ -59,28 +59,36 @@ func (cou *impl) Clean() {
 	cou.Unlock()
 }
 
-// Percent Процент обращений текущей минуты по отношению к предыдущим
-func (cou *impl) Percent() (ret float64) {
-	var tm time.Time
-	var du time.Duration
+func (cou *impl) history() (ret []uint32) {
 	var key int64
 	var value uint32
-	var history []uint32
-	var n, m uint64
-	var ap float64
+	var tm time.Time
+	var du time.Duration
+	var n uint64
 
-	cou.Clean()
-	history = make([]uint32, cou.count)
+	ret = make([]uint32, cou.count)
 	cou.RLock()
 	for key, value = range cou.mem {
 		tm = time.Unix(0, key)
 		du = time.Since(tm)
 		n = uint64(du / cou.duration)
 		if n < cou.count {
-			history[n] += value
+			ret[n] += value
 		}
 	}
 	cou.RUnlock()
+
+	return
+}
+
+// Percent Процент обращений текущего интервала по отношению к предыдущим
+func (cou *impl) Percent() (ret float64) {
+	var history []uint32
+	var n, m uint64
+	var ap float64
+
+	cou.Clean()
+	history = cou.history()
 
 	for n = 1; n < cou.count; n++ {
 		if history[n] == 0 {
@@ -94,6 +102,19 @@ func (cou *impl) Percent() (ret float64) {
 		return
 	}
 	ret = ap / float64(m) * 100
+
+	return
+}
+
+// IsFirst Returns true if in first interval zero hits
+func (cou *impl) IsFirst() (ret bool) {
+	var history []uint32
+
+	cou.Clean()
+	history = cou.history()
+	if history[0] == 0 {
+		ret = true
+	}
 
 	return
 }

@@ -20,6 +20,9 @@ type Interface interface {
 	// Percent The percentage of hits of the current minute in relation to the average number of hits for the entire history of all intervals
 	Percent() float64
 
+	// IsFirst Returns true if in first interval zero hits
+	IsFirst() bool
+
 	// NewDuration Set new interval duration of the account of hits
 	NewDuration(duration time.Duration) Interface
 
