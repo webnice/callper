@@ -5,9 +5,12 @@ DATE=$(shell date -u +%Y%m%d.%H%M%S.%Z)
 
 default: lint test
 
-test:
-	clear
+link:
 	ln -s . src 2>/dev/null; true
+.PHONY: link
+
+test: link
+	clear
 	GOPATH=${GOPATH} go test -race -cover -v -coverprofile=coverage.log counter
 .PHONY: test
 
@@ -15,8 +18,7 @@ cover: test
 	GOPATH=${GOPATH} go tool cover -html=coverage.log
 .PHONY: cover
 
-bench:
-	ln -s . src 2>/dev/null; true
+bench: link
 	GOPATH=${GOPATH} go test -race -bench=. ./...
 .PHONY: bench
 
